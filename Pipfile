@@ -11,5 +11,11 @@ python_version = "3.6"
 django-heroku = "*"
 gunicorn = "*"
 django = "*"
+django-model-utils = "*"
+django-extensions = "*"
+ipython = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
 
 [dev-packages]

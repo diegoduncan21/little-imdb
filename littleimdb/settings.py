@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'core',
+    'django_extensions',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
