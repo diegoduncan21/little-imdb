@@ -17,5 +17,6 @@ ipython = "*"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
+django-rest-swagger = "*"
 
 [dev-packages]
