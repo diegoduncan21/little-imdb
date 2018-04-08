@@ -20,5 +20,6 @@ django-filter = "*"
 django-rest-swagger = "*"
 ipdb = "*"
 django-url-filter = "*"
+coreapi = "*"
 
 [dev-packages]

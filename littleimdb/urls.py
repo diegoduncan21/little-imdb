@@ -12,14 +12,14 @@ router = routers.DefaultRouter()
 router.register('persons', PersonViewSet)
 router.register('movies', MovieViewSet)
 
-schema_view = get_swagger_view(title='Little IMDb')
-asd_view = get_schema_view(title='Pastebin API')
+docs_view = get_swagger_view(title='Little IMDb')
+schema_view = get_schema_view(title='Schema API')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/', include(router.urls)),
-    path('docs/', schema_view),
-    path('schema/', asd_view),
+    path('docs/', docs_view),
+    path('schema/', schema_view),
 ]
