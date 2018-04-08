@@ -1,6 +1,7 @@
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 
+from .filters import MovieFilterSet, PersonFilterSet
 from .models import Movie, Person
 from .serializers.movies import (
     MovieCreateSerializer,
@@ -9,17 +10,28 @@ from .serializers.movies import (
 from .serializers.persons import PersonSerializer
 
 
-from url_filter.filtersets import ModelFilterSet
-
-
-class PersonFilterSet(ModelFilterSet):
-    class Meta(object):
-        model = Person
-
-
 class PersonViewSet(viewsets.ModelViewSet):
     """
-    Persons endpoint.
+    retrieve:
+        Return a person instance.
+
+    list:
+        Return all persons.
+
+        Can be filtered by url query like django orm,
+        i.e: ?first_name__contains=Quentin&aliases__alias=tarantinito
+
+    create:
+        Create a new person.
+
+    delete:
+        Remove an existing person.
+
+    partial_update:
+        Update one or more fields on an existing person.
+
+    update:
+        Update a person.
     """
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
@@ -31,9 +43,38 @@ class PersonViewSet(viewsets.ModelViewSet):
 
 class MovieViewSet(viewsets.ModelViewSet):
     """
-    Movies endpoint.
+    retrieve:
+        Return a movie instance.
+
+    list:
+        Return all movies.
+
+        Can be filtered by url query like django orm,
+        i.e: ?title__contains=pulp
+
+    create:
+        Create a new movie.
+
+        castings, directors and producers have to be pre created.
+        API expect an array of ids.
+
+    delete:
+        Remove an existing movie.
+
+    partial_update:
+        Update one or more fields on an existing movie.
+
+    update:
+        Update a movie.
+
+        castings, directors and producers have to be pre created.
+        API expect an array of ids.
     """
     queryset = Movie.objects.all()
+
+    def get_queryset(self):
+        fs = MovieFilterSet(data=self.request.GET, queryset=self.queryset)
+        return fs.filter()
 
     def get_serializer_class(self):
         if self.action in ['create', 'update']:
