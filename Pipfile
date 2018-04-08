@@ -18,5 +18,6 @@ djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
 django-rest-swagger = "*"
+ipdb = "*"
 
 [dev-packages]
