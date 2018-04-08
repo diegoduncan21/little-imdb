@@ -19,5 +19,6 @@ markdown = "*"
 django-filter = "*"
 django-rest-swagger = "*"
 ipdb = "*"
+django-url-filter = "*"
 
 [dev-packages]

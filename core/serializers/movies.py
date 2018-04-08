@@ -45,6 +45,16 @@ class MovieListSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class MovieCreateSerializer(serializers.HyperlinkedModelSerializer):
+    castings = serializers.PrimaryKeyRelatedField(
+        queryset=Person.objects.all(),
+        many=True)
+    directors = serializers.PrimaryKeyRelatedField(
+        queryset=Person.objects.all(),
+        many=True)
+    producers = serializers.PrimaryKeyRelatedField(
+        queryset=Person.objects.all(),
+        many=True)
+
     release_year = serializers.IntegerField()
 
     class Meta:
@@ -52,5 +62,8 @@ class MovieCreateSerializer(serializers.HyperlinkedModelSerializer):
             'id',
             'title',
             'release_year',
+            'castings',
+            'directors',
+            'producers',
         ]
         model = Movie
